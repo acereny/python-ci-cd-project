@@ -3,18 +3,23 @@ name: Python CI/CD Pipeline
 on:
   push:
 
+permissions:
+  contents: read
+
 jobs:
   test-and-deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
       - name: Get repository code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.12"
+          cache: pip
 
       - name: Install dependencies
         run: |
@@ -28,6 +33,4 @@ jobs:
         run: python -m pytest test_ui.py -v
 
       - name: Deployment confirmation
-        if: ${{ success() }}
-        run: |
-          echo "All tests passed! Application successfully deployed to production."
+        run: echo "All tests passed! Application successfully deployed to production."
