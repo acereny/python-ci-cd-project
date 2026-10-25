@@ -1,4 +1,4 @@
-def calculate_telecom_tax(amount, tax_rate):
+def calculate_telecom_tax(amount: float, tax_rate: float) -> float:
+    """Return an amount after applying the given percentage tax rate."""
     tax_amount = amount * tax_rate / 100
-    total_amount = amount + tax_amount
-    return total_amount
+    return amount + tax_amount
